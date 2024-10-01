@@ -18,7 +18,7 @@ Using Mutexes in OOP
 In OOP, mutexes can be encapsulated within classes to protect shared resources and ensure thread safety. Let’s consider a simple example where multiple threads increment a shared counter.
 
 =========================================================
-In this example, the Counter class contains a mutex (mtx) to ensure that the increment method is thread-safe. The std::lock_guard is used to automatically lock and unlock the mutex when a thread accesses the shared resource.
+In lock_guard.cpp, the Counter class contains a mutex (mtx) to ensure that the increment method is thread-safe. The std::lock_guard is used to automatically lock and unlock the mutex when a thread accesses the shared resource.
 Each thread calls increment(), and std::lock_guard ensures that only one thread can modify the count at a time.
 The program ensures that race conditions are avoided, and the final value of count is consistent, regardless of how the threads are scheduled by the operating system.
 =========================================================
