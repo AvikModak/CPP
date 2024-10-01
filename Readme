@@ -1,0 +1,24 @@
+In Object-Oriented Programming (OOP), multithreading allows multiple threads to execute concurrently, improving application performance by utilizing CPU cores efficiently. However, when multiple threads access shared resources simultaneously, race conditions and data inconsistencies can occur. To handle this, synchronization mechanisms like mutex and locks are used to ensure that only one thread accesses the critical section of code at a time. This article explores mutex and locks in OOP, detailing their importance, usage, and how they contribute to writing thread-safe programs.
+
+What is a Mutex?
+A mutex (short for "mutual exclusion") is a synchronization primitive used to protect shared resources in a multithreaded environment. It ensures that only one thread can access a particular section of code, known as the critical section, at a time. When a thread locks the mutex, other threads attempting to acquire the lock are blocked until the first thread releases the lock.
+
+Key Mutex Concepts:
+Locking: A thread acquires a lock to gain exclusive access to the resource.
+Unlocking: The thread releases the lock once it is done with the resource, allowing other threads to access it.
+Blocking: Threads that attempt to lock an already locked mutex will be blocked until the lock is released.
+
+What are Locks?
+Locks are higher-level abstractions over mutexes and are often used to provide finer control over critical sections. In C++, locks can be implemented using std::lock_guard or std::unique_lock. They automatically manage the locking and unlocking of mutexes, making it easier to avoid common mistakes such as forgetting to release the lock.
+
+std::lock_guard: A simple RAII-based mechanism that locks a mutex upon creation and unlocks it when the guard goes out of scope.
+std::unique_lock: A more flexible lock mechanism that allows for deferred locking, timed locking, and manual unlocking.
+
+Using Mutexes in OOP
+In OOP, mutexes can be encapsulated within classes to protect shared resources and ensure thread safety. Let’s consider a simple example where multiple threads increment a shared counter.
+
+=========================================================
+In this example, the Counter class contains a mutex (mtx) to ensure that the increment method is thread-safe. The std::lock_guard is used to automatically lock and unlock the mutex when a thread accesses the shared resource.
+Each thread calls increment(), and std::lock_guard ensures that only one thread can modify the count at a time.
+The program ensures that race conditions are avoided, and the final value of count is consistent, regardless of how the threads are scheduled by the operating system.
+=========================================================
