@@ -17,8 +17,19 @@ std::unique_lock: A more flexible lock mechanism that allows for deferred lockin
 Using Mutexes in OOP
 In OOP, mutexes can be encapsulated within classes to protect shared resources and ensure thread safety. Let’s consider a simple example where multiple threads increment a shared counter.
 
+Using Mutex with std::lock_guard (lock_guard.cpp)
 =========================================================
 In lock_guard.cpp, the Counter class contains a mutex (mtx) to ensure that the increment method is thread-safe. The std::lock_guard is used to automatically lock and unlock the mutex when a thread accesses the shared resource.
 Each thread calls increment(), and std::lock_guard ensures that only one thread can modify the count at a time.
 The program ensures that race conditions are avoided, and the final value of count is consistent, regardless of how the threads are scheduled by the operating system.
 =========================================================
+
+Using Mutex with std::unique_lock (unique_lock.cpp)
+=========================================================
+The std::unique_lock is more versatile than std::lock_guard, allowing more control over the locking and unlocking of mutexes. In this example, std::unique_lock provides more flexibility. The lock can be manually unlocked when no longer needed, allowing the thread to perform other tasks without holding the lock unnecessarily.
+=========================================================
+
+Benefits of using std::unique_lock :-
+Deferred Locking: The lock can be acquired later when necessary.
+Timed Locking: It allows for locking attempts that can timeout if the lock isn’t available.
+Manual Unlocking: You can explicitly unlock the mutex when needed.
